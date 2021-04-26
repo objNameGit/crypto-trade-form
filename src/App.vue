@@ -1,56 +1,47 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld />
-    </v-main>
+    <v-card
+      class="ma-auto"
+      :min-width="250"
+      :max-width="600"
+      elevation="2"
+      outlined
+    >
+      <v-card-text class="text-h5">
+        <Wallet />
+        <TradeForm :wallet="wallet" />
+      </v-card-text>
+    </v-card>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import { mapGetters } from "vuex";
+
+import TradeForm from "@/components/TradeForm.vue";
+import Wallet from "@/components/Wallet.vue";
 
 export default {
   name: "App",
-
   components: {
-    HelloWorld,
+    TradeForm,
+    Wallet,
   },
-
-  data: () => ({
-    //
-  }),
+  computed: {
+    ...mapGetters(["currencyList", "wallet"]),
+  },
 };
 </script>
+
+<style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 10px;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+</style>
