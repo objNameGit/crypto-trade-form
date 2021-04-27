@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+  publicPath: "/crypto-trade-form/",
   transpileDependencies: ["vuetify"],
   configureWebpack: {
     resolve: {
