@@ -13,6 +13,7 @@
   background-color: black;
   text-align: center;
   width: 100%;
+  width: 100%;
 }
 
 .easter-egg__button {
