@@ -9,7 +9,10 @@
     >
       <v-card-text class="text-h5">
         <Wallet />
-        <TradeForm :wallet="wallet" />
+        <TradeForm
+          :priceCurrency="getPriceCurrency()"
+          :amountCurrency="getAmountCurrency()"
+        />
       </v-card-text>
     </v-card>
   </v-app>
@@ -29,6 +32,14 @@ export default {
   },
   computed: {
     ...mapGetters(["currencyList", "wallet"]),
+  },
+  methods: {
+    getPriceCurrency() {
+      return this.currencyList[0].currencyName;
+    },
+    getAmountCurrency() {
+      return this.currencyList[1].currencyName;
+    },
   },
 };
 </script>
