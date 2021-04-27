@@ -13,7 +13,7 @@
           class="currency__value currency-list_cell darken-3"
           :class="{ 'warning-color': isNegativeValue(currency.quantity) }"
         >
-          {{ currency.quantity }}
+          {{ currency.quantity | dotReplace }}
         </span>
         <span
           class="currency__name currency-list_cell"
