@@ -17,6 +17,8 @@
         @input="formatInputString($event.target.value)"
         @change="updateValue($event.target.value)"
       />
+        <!-- @input="formatInputString($event.target.value)"
+        @change="updateValue($event.target.value)" -->
       <div class="custom-input__currency-name custom-input_margin_right">
         <label :for="inputName"> {{ currencyName }} </label>
       </div>
@@ -126,7 +128,7 @@ export default {
     updateValue(value) {
       const parsedValue = parseFloat(value);
 
-      this.$emit(`change-input-value`, parsedValue);
+      this.$emit("update:inputValue", parsedValue);
     },
   },
   mounted() {

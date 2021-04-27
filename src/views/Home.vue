@@ -1,18 +1,46 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <v-card
+    class="ma-auto"
+    :min-width="250"
+    :max-width="450"
+    elevation="2"
+    outlined
+  >
+    <v-card-text class="text-h5">
+      <Wallet />
+      <TradeForm
+        :priceCurrency="getPriceCurrency()"
+        :amountCurrency="getAmountCurrency()"
+      />
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { mapGetters } from "vuex";
+
+import TradeForm from "@/components/TradeForm.vue";
+import Wallet from "@/components/Wallet.vue";
 
 export default {
-  name: "Home",
+  name: "Form",
   components: {
-    HelloWorld,
+    TradeForm,
+    Wallet,
+  },
+  computed: {
+    ...mapGetters(["currencyList", "wallet"]),
+  },
+  methods: {
+    toAbout() {
+      this.$router.push("about");
+    },
+    getPriceCurrency() {
+      return this.currencyList[0].currencyName;
+    },
+    getAmountCurrency() {
+      return this.currencyList[1].currencyName;
+    },
   },
 };
 </script>

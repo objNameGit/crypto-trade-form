@@ -1,44 +1,42 @@
 <template>
-  <v-app>
-    <v-card
-      class="ma-auto"
-      :min-width="250"
-      :max-width="600"
-      elevation="2"
-      outlined
+  <v-app class="app">
+    <div
+      class="app__link hidden-link unselectable"
+      v-if="isVisible"
+      @click="toEasterEgg"
     >
-      <v-card-text class="text-h5">
-        <Wallet />
-        <TradeForm
-          :priceCurrency="getPriceCurrency()"
-          :amountCurrency="getAmountCurrency()"
-        />
-      </v-card-text>
-    </v-card>
+      Перейти к Foo
+    </div>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
-import TradeForm from "@/components/TradeForm.vue";
-import Wallet from "@/components/Wallet.vue";
-
 export default {
   name: "App",
-  components: {
-    TradeForm,
-    Wallet,
-  },
   computed: {
-    ...mapGetters(["currencyList", "wallet"]),
+    isVisible: function () {
+      return this.$route.name !== "EasterEgg";
+    },
+  },
+  data() {
+    return {
+      counter: 0,
+    };
   },
   methods: {
-    getPriceCurrency() {
-      return this.currencyList[0].currencyName;
-    },
-    getAmountCurrency() {
-      return this.currencyList[1].currencyName;
+    toEasterEgg() {
+      const validNum = 2;
+
+      this.counter += 1;
+
+      if (this.counter > validNum) {
+        this.$router.push("/easter-egg");
+
+        this.counter = 0;
+      }
+
+      return;
     },
   },
 };
@@ -54,5 +52,22 @@ export default {
 :root {
   font-size: 10px;
   font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+.hidden-link {
+  opacity: 0;
+  position: absolute;
+  cursor: default;
+  height: 15px;
+  right: 15px;
+  top: 15px;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 </style>
